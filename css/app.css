@@ -1,0 +1,46 @@
+/* Sandstone */
+@import "sandstone.min.css";
+
+/* Tabzilla */
+@import "//www.mozilla.org/tabzilla/media/css/tabzilla.css";
+
+/* Your styles here */
+html, body {
+	height: 100%;
+}
+#outer-wrapper {
+	min-height: 100%;
+	min-height: -moz-calc(100% - 2px);
+	min-height: -webkit-calc(100% - 2px);
+	min-height: -o-calc(100% - 2px);
+	min-height: -ms-calc(100% - 2px);
+	min-height: calc(100% - 2px);
+}
+
+#notify {
+	font-family: Open Sans;
+	font-size: smaller;
+	background: #fff;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	display: none;
+}
+#notify article {
+	padding: 10px;
+	height: 40px;
+}
+#notify h4 {
+	font-weight: bold;
+	padding: 0;
+	margin: 0;
+}
+#notify p {
+	padding: 0;
+	margin: 0;
+}
+#notify img {
+	max-height: 40px;
+	float: left;
+	padding: 0 10px 0 0;
+}
