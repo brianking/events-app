@@ -44,9 +44,6 @@ html, body {
 	padding: 0 10px 0 0;
 }
 
-.session-list h2 {
-	text-align: center;
-}
 .indicator {
 	width: 32px;
 	height: 32px;
@@ -64,4 +61,16 @@ html, body {
 	border-bottom: 1px dotted rgb(214, 214, 214);
 	padding: 8px 0;
 	margin: 0;
+}
+
+#session dl > dt {
+	font-size: larger;
+	margin-bottom: 4px;
+}
+#session dl > dd {
+	margin-bottom: 8px;
+}
+
+.session-list .room, .session-list .time, .session-list .speaker {
+	display: block;
 }

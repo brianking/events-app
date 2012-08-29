@@ -73,7 +73,19 @@ define("app", function(require) {
 			}
 		});
 	});
-
+	
+	// unstarring session (starred page)
+	$(function(){
+		$('#starred .indicator.starred').click(function(e){
+			if(confirm('Are you sure you want to stop tracking "' + $(this).parent().text() + '"?')) {
+				$(this).parents('li').eq(0).fadeOut('slow');
+			}
+			else {
+				$(this).addClass('starred');
+				return false;
+			}
+		});
+	});
 
 
 
