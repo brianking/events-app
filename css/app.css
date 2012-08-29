@@ -40,7 +40,28 @@ html, body {
 	margin: 0;
 }
 #notify img {
-	max-height: 40px;
 	float: left;
 	padding: 0 10px 0 0;
+}
+
+.session-list h2 {
+	text-align: center;
+}
+.indicator {
+	width: 32px;
+	height: 32px;
+	content: ' ';
+	background: url('../img/icons/star-empty.png') no-repeat;
+	display: block;
+	margin: -4px 8px -4px 0;
+	float: left;
+}
+.indicator.starred {
+	background: url('../img/icons/star-full.png') no-repeat;
+}
+.session-list li {
+	list-style: none;
+	border-bottom: 1px dotted rgb(214, 214, 214);
+	padding: 8px 0;
+	margin: 0;
 }

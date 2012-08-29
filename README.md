@@ -25,6 +25,14 @@ In the session details view we get all the available details on a session, as we
 ![session](http://cl.ly/image/3b2U2i2w2734/session.gif)
 
 ## ChangeLog
+### 2012-08-28
+Screenshot of current state: [cl.ly/image/1d1g0q1R3m3l](http://cl.ly/image/1d1g0q1R3m3l)
+
+* Added starred sessions view
+* Added basic star changing view for lists
+* Added modified app navigation for speed of creation to just use sandstone navigation drop down/list depending on screen size
+* Added whole bunch of issues to [github issue tracking](https://github.com/brianking/events-app/issues) for people to just take and work on , please mark on the issue that you are working on it so we don't get too many collisions of creation, feel free to add issues if I have missed anything or something needs splitting into smaller pieces
+
 ### 2012-08-27
 Screenshot of current state: [cl.ly/image/0Q3O2s0H322L](http://cl.ly/image/0Q3O2s0H322L)
 

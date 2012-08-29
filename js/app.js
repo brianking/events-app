@@ -24,6 +24,9 @@ require(['https://marketplace.cdn.mozilla.net/mozmarket.js'],
 
 // Include tabzilla
 require(['//www.mozilla.org/tabzilla/media/js/tabzilla.js']);
+// Include mozilla site js
+require(['//www.mozilla.org/media/js/site-min.js']);
+require(['//www.mozilla.org/media/js/mozorg-resp-min.js']);
 
 
 // When you write javascript in separate files, list them as
@@ -39,6 +42,7 @@ define("app", function(require) {
 
 
     // START HERE: Put your js code here
+    // notify animation
     $(function(){
     	$('#notify').delay('4000').slideToggle('slow', function(){
     		$(this).click(function(){
@@ -46,6 +50,34 @@ define("app", function(require) {
     		});
     	});
     });
+
+	// starring session action (list)
+	$(function(){
+		$('.indicator').click(function(e){
+			if($(this).hasClass('starred'))	{
+				$(this).removeClass('starred');
+			}
+			else {
+				$(this).addClass('starred');
+			}
+			
+			// fixes selection bug
+			if (window.getSelection) {
+				if (window.getSelection().empty) {  // Chrome
+					window.getSelection().empty();
+				} else if (window.getSelection().removeAllRanges) {  // Firefox
+					window.getSelection().removeAllRanges();
+				}
+			} else if (document.selection) {  // IE?
+				document.selection.empty();
+			}
+		});
+	});
+
+
+
+
+
 
     // Hook up the installation button, feel free to customize how
     // this works
