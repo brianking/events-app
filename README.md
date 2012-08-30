@@ -24,6 +24,22 @@ In the session details view we get all the available details on a session, as we
 
 ![session](http://cl.ly/image/3b2U2i2w2734/session.gif)
 
+## Server stuff
+### Requirements
+  * Node.js
+  * npm
+  * CouchDB
+
+### Get the server up and running
+
+Create a CouchDB database called "mozcamp-app".
+
+Make sure CouchDB is running and then run (in the root of the repo):
+``` bash
+  $ npm install
+  $ node app
+```
+
 ## ChangeLog
 ### 2012-08-29
 Screenshot of current state: [cl.ly/image/1S2S1X2G220F](http://cl.ly/image/1S2S1X2G220F)
