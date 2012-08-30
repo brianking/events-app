@@ -4,9 +4,9 @@ var db = new(cradle.Connection)().database("mozcamp-app");
 
 // get schedule from wiki
 exports.update = function(){
-    require("./get-schedule").getSchedule(function(schedule){
+  require("./get-schedule").getSchedule(function(schedule){
 
-        db.save("schedule", schedule);
+    db.save("schedule", schedule);
 
-    });
+   });
 }
