@@ -5,6 +5,9 @@ var routes = require("./routes");
 var http = require("http");
 var path = require("path");
 
+// set timezone to warsaw (this is important to ensure that date objects don't get printed as the localtime of the server)
+process.env.TZ = "Europe/Warsaw";
+
 // populate database
 
 require("./modules/database").update();

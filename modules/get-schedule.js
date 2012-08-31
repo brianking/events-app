@@ -1,4 +1,5 @@
 var request = require("request");
+var moment = require("moment");
 
 var parseTime = function(time){
     var parsedTime = time.replace(/time=/, "").replace(/am/, "").replace(/pm/, "").replace(/ /g, "").split("-");
@@ -23,8 +24,10 @@ var createRow = function(element, day){
         if(index < 2) return;
         sessions.push(element.replace(/all=/, "").replace(/Main=/, "").replace(/Room 1=/, "").replace(/Room 2=/, "").replace(/Room 3=/, "").replace(/Room 4=/, "").replace(/Room 5=/, ""));
     });
+    var start = new Date("2012-09-" + day + "T" + time[0] + "+0200");
+    var end = new Date("2012-09-" + day + "T" + time[1] + "+0200");
     return {
-        time: [ "2012-09-" + day + "T" + time[0] + "+0200", "2012-09-" + day + "T" + time[1] + "+0200" ],
+        time: [start, end],
         sessions: sessions
     };
 }
