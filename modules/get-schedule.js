@@ -22,16 +22,17 @@ var createRow = function(elements, day){
     var sessions = [];
     elements.forEach(function(element, index){
         if(index < 2) return;
-        if(/\[\[/.test(element)) return;
-        if(/\]\]$/.test(element)){
+        var element = element.replace(/all=/, "").replace(/Main=/, "").replace(/Room 1=/, "").replace(/Room 2=/, "").replace(/Room 3=/, "").replace(/Room 4=/, "").replace(/Room 5=/, "");
+        if(/^ *\[\[/.test(element)) return;
+        if(/\]\] *$/.test(element)){
             sessions.push({
                 title: element.replace(/]]$/, ""),
-                link: elements[index-1].replace(/.*\[\[/, "")
+                link: elements[index-1].replace(/^.*\[\[/, "")
             });
             return;
         }
         sessions.push({
-            title: element.replace(/all=/, "").replace(/Main=/, "").replace(/Room 1=/, "").replace(/Room 2=/, "").replace(/Room 3=/, "").replace(/Room 4=/, "").replace(/Room 5=/, ""),
+            title: element,
             link: false
         });
     });
