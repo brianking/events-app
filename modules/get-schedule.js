@@ -32,15 +32,11 @@ var createRow = function(elements, day){
         }
         sessions.push({
             title: element.replace(/all=/, "").replace(/Main=/, "").replace(/Room 1=/, "").replace(/Room 2=/, "").replace(/Room 3=/, "").replace(/Room 4=/, "").replace(/Room 5=/, ""),
-            link: ""
+            link: false
         });
     });
     var start = new Date("2012-09-" + day + "T" + time[0] + "+0200");
     var end = new Date("2012-09-" + day + "T" + time[1] + "+0200");
-    console.log({
-        time: [start, end],
-        sessions: sessions
-    });
     return {
         time: [start, end],
         sessions: sessions
