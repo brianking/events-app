@@ -8,7 +8,7 @@ exports.index = function(req, res){
 
 exports.schedule = function(req, res){
   db.get("schedule", function(err, doc){
-    res.render("schedule", {items: doc.items});
+    res.render("schedule", {days: doc.days});
   });
 };
 

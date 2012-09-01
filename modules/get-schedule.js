@@ -62,15 +62,21 @@ exports.getSchedule = function(callback){
 
             var forDatabase = {
                 type: "schedule",
-                items: []
+                days: [{
+                    day: "Saturday",
+                    items: []
+                }, {
+                    day: "Sunday",
+                    items: []
+                }]
             };
 
             parseTable(wiki[0]).forEach(function(element){
-                forDatabase.items.push(createRow(element, "08"));
+                forDatabase.days[0].items.push(createRow(element, "08"));
             });
 
             parseTable(wiki[1]).forEach(function(element){
-                forDatabase.items.push(createRow(element, "09"));
+                forDatabase.days[1].items.push(createRow(element, "09"));
             });
 
             callback(forDatabase);

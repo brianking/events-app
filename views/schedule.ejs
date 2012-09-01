@@ -52,10 +52,12 @@
           <div class="row">
             <section class="session-list span10">
               <h2>Schedule</h2>
-              <% items.forEach(function(item){ %>
+              <% days.forEach(function(day){ %>
+              <h3><%= day.day %></h3>
+              <% day.items.forEach(function(item){ %>
               <% var start = new Date(item.time[0]); %>
               <% var end = new Date(item.time[1]); %>
-              <h3><%= (start.getHours() < 10 ? '0' : '') + start.getHours() %>:<%= (start.getMinutes() < 10 ? '0' : '') + start.getMinutes() %> - <%= (end.getHours() < 10 ? '0' : '') + end.getHours() %>:<%= (end.getMinutes() < 10 ? '0' : '') + end.getMinutes() %></h3>
+              <h4><%= (start.getHours() < 10 ? '0' : '') + start.getHours() %>:<%= (start.getMinutes() < 10 ? '0' : '') + start.getMinutes() %> - <%= (end.getHours() < 10 ? '0' : '') + end.getHours() %>:<%= (end.getMinutes() < 10 ? '0' : '') + end.getMinutes() %></h4>
               <ul>
                 <% item.sessions.forEach(function(session){ %>
                 <% if(session.link){ %>
@@ -65,6 +67,7 @@
                 <% } %>
                 <% }); %>
               </ul>
+              <% }); %>
               <% }); %>
             </section>
           </div>
