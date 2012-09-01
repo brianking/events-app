@@ -29,15 +29,24 @@ var createRow = function(elements, day){
                 title: element.replace(/]]$/, ""),
                 link: elements[index-1].replace(/^.*\[\[/, "")
             });
-            return;
+        } else if(/^ *\[ *https?\:\/\/wiki\.mozilla\.org\//.test(element)) {
+            sessions.push({
+                title: element.replace(/^.*\[\S* /, "").replace(/\].*$/, ""),
+                link: element.replace(/^.*\[ *https?\:\/\/wiki\.mozilla\.org\//, "").replace(/\].*$/, "").replace(" " + element.replace(/^.*\[\S* /, "").replace(/\].*$/, ""), ""),
+            });
+        } else {
+            sessions.push({
+                title: element,
+                link: false
+            });
         }
-        sessions.push({
-            title: element,
-            link: false
-        });
     });
     var start = new Date("2012-09-" + day + "T" + time[0] + "+0200");
     var end = new Date("2012-09-" + day + "T" + time[1] + "+0200");
+    /*console.log({
+        time: [start, end],
+        sessions: sessions
+    });*/
     return {
         time: [start, end],
         sessions: sessions
