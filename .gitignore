@@ -37,3 +37,4 @@ Thumbs.db
 #######################
 *.esproj
 *.swp
+node_modules/

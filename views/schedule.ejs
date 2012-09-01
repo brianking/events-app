@@ -58,7 +58,7 @@
               <h3><%= (start.getHours() < 10 ? '0' : '') + start.getHours() %>:<%= (start.getMinutes() < 10 ? '0' : '') + start.getMinutes() %> - <%= (end.getHours() < 10 ? '0' : '') + end.getHours() %>:<%= (end.getMinutes() < 10 ? '0' : '') + end.getMinutes() %></h3>
               <ul>
                 <% item.sessions.forEach(function(session){ %>
-                <li><span class="indicator"></span><a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a></li>
+                <li class="clearfix"><span class="indicator"></span><a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a></li>
                 <% }); %>
               </ul>
               <% }); %>
