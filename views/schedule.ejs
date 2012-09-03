@@ -60,10 +60,18 @@
               <h4><%= (start.getHours() < 10 ? '0' : '') + start.getHours() %>:<%= (start.getMinutes() < 10 ? '0' : '') + start.getMinutes() %> - <%= (end.getHours() < 10 ? '0' : '') + end.getHours() %>:<%= (end.getMinutes() < 10 ? '0' : '') + end.getMinutes() %></h4>
               <ul>
                 <% item.sessions.forEach(function(session){ %>
+                <% if(session.single){ %>
                 <% if(session.link){ %>
                 <li class="clearfix"><span class="indicator"></span><a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a></li>
                 <% } else { %>
                 <li class="clearfix"><span class="indicator"></span><%= session.title %></li>
+                <% } %>
+                <% } else { %>
+                <li class="clearfix">
+                <% session.sessions.forEach(function(session){ %>
+                <span class="indicator"></span><small><%= session.time %></small> <a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a>
+                <% }); %>
+                </li>
                 <% } %>
                 <% }); %>
               </ul>

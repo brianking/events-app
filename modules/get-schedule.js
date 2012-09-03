@@ -23,21 +23,38 @@ var createRow = function(elements, day){
     elements.forEach(function(element, index){
         if(index < 2) return;
         var element = element.replace(/all=/, "").replace(/Main=/, "").replace(/Room 1=/, "").replace(/Room 2=/, "").replace(/Room 3=/, "").replace(/Room 4=/, "").replace(/Room 5=/, "");
-        if(/^ *\[\[/.test(element)) return;
-        if(/\]\] *$/.test(element)){
+        if(/<hr>/.test(element)){
+            sessions.push({
+                single: false,
+                sessions: [{
+                    title: element.replace(/<hr>.*/, "").replace(/ *<small>.*<\/small> */, "").replace(/^.*\[\S* /, "").replace(/\].*$/, ""),
+                    link: element.replace(/<hr>.*/, "").replace(/ *<small>.*<\/small> */, "").replace(/^.*\[ *https?\:\/\/wiki\.mozilla\.org\//, "").replace(/\].*$/, "").replace(" " + element.replace(/^.*\[\S* /, "").replace(/\].*$/, ""), ""),
+                    time: element.replace(/^ *<small>/, "").replace(/<\/small>.*/, "")
+                },{
+                    title: element.replace(/.*<hr>/, "").replace(/ *<small>.*<\/small> */, "").replace(/^.*\[\S* /, "").replace(/\].*$/, ""),
+                    link: element.replace(/.*<hr>/, "").replace(/ *<small>.*<\/small> */, "").replace(/^.*\[ *https?\:\/\/wiki\.mozilla\.org\//, "").replace(/\].*$/, "").replace(" " + element.replace(/^.*\[\S* /, "").replace(/\].*$/, ""), ""),
+                    time: element.replace(/^.*<hr><small>/, "").replace(/<\/small>.*/, "")
+                }]
+            });
+        } else if(/^ *\[\[/.test(element)){
+            return;
+        } else if(/\]\] *$/.test(element)){
             sessions.push({
                 title: element.replace(/]]$/, ""),
-                link: elements[index-1].replace(/^.*\[\[/, "")
+                link: elements[index-1].replace(/^.*\[\[/, ""),
+                single: true
             });
         } else if(/^ *\[ *https?\:\/\/wiki\.mozilla\.org\//.test(element)) {
             sessions.push({
                 title: element.replace(/^.*\[\S* /, "").replace(/\].*$/, ""),
                 link: element.replace(/^.*\[ *https?\:\/\/wiki\.mozilla\.org\//, "").replace(/\].*$/, "").replace(" " + element.replace(/^.*\[\S* /, "").replace(/\].*$/, ""), ""),
+                single: true
             });
         } else {
             sessions.push({
                 title: element,
-                link: false
+                link: false,
+                single: true
             });
         }
     });
