@@ -23,7 +23,7 @@ var createRow = function(elements, day){
     elements.forEach(function(element, index){
         if(index < 2) return;
         var element = element.replace(/all=/, "").replace(/Main=/, "").replace(/Room 1=/, "").replace(/Room 2=/, "").replace(/Room 3=/, "").replace(/Room 4=/, "").replace(/Room 5=/, "");
-        if(/<hr>/.test(element)){
+        if(/<hr\/?>/.test(element)){
             sessions.push({
                 single: false,
                 sessions: [{

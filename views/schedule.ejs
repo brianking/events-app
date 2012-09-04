@@ -68,8 +68,9 @@
                 <% } %>
                 <% } else { %>
                 <li class="clearfix">
+                <span class="indicator"></span>
                 <% session.sessions.forEach(function(session){ %>
-                <span class="indicator"></span><small><%= session.time %></small> <a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a>
+                <small><%= session.time %></small> <a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a>
                 <% }); %>
                 </li>
                 <% } %>
