@@ -1,3 +1,7 @@
+// okay, this is the worst written piece of code ever
+// yes, that means it's worse than the original netscape codebase
+// heck... it's even worse than the internet explorer codebase!
+// I think I'll document this later, but if you have any questions, just send them my way! (leo on IRC, leo@mozilla.org.uk)
 var request = require("request");
 var moment = require("moment");
 

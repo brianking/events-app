@@ -53,30 +53,30 @@
             <section class="session-list span10">
               <h2>Schedule</h2>
               <% days.forEach(function(day){ %>
-              <h3><%= day.day %></h3>
-              <% day.items.forEach(function(item){ %>
-              <% var start = new Date(item.time[0]); %>
-              <% var end = new Date(item.time[1]); %>
-              <h4><%= (start.getHours() < 10 ? '0' : '') + start.getHours() %>:<%= (start.getMinutes() < 10 ? '0' : '') + start.getMinutes() %> - <%= (end.getHours() < 10 ? '0' : '') + end.getHours() %>:<%= (end.getMinutes() < 10 ? '0' : '') + end.getMinutes() %></h4>
-              <ul>
-                <% item.sessions.forEach(function(session){ %>
-                <% if(session.single){ %>
-                <% if(session.link){ %>
-                <li class="clearfix"><span class="indicator"></span><a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a></li>
-                <% } else { %>
-                <li class="clearfix"><span class="indicator"></span><%= session.title %></li>
-                <% } %>
-                <% } else { %>
-                <li class="clearfix">
-                <span class="indicator"></span>
-                <% session.sessions.forEach(function(session){ %>
-                <small><%= session.time %></small> <a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a>
+                <h3><%= day.day %></h3>
+                <% day.items.forEach(function(item){ %>
+                  <% var start = new Date(item.time[0]); %>
+                  <% var end = new Date(item.time[1]); %>
+                  <h4><%= (start.getHours() < 10 ? '0' : '') + start.getHours() %>:<%= (start.getMinutes() < 10 ? '0' : '') + start.getMinutes() %> - <%= (end.getHours() < 10 ? '0' : '') + end.getHours() %>:<%= (end.getMinutes() < 10 ? '0' : '') + end.getMinutes() %></h4>
+                  <ul>
+                    <% item.sessions.forEach(function(session){ %>
+                      <% if(session.single){ %>
+                        <% if(session.link){ %>
+                          <li class="clearfix"><span class="indicator"></span><a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a></li>
+                        <% } else { %>
+                          <li class="clearfix"><span class="indicator"></span><%= session.title %></li>
+                        <% } %>
+                      <% } else { %>
+                        <li class="clearfix">
+                          <span class="indicator"></span>
+                          <% session.sessions.forEach(function(session){ %>
+                            <small><%= session.time %></small> <a href="https://wiki.mozilla.org/<%- session.link %>"><%= session.title %></a>
+                          <% }); %>
+                        </li>
+                      <% } %>
+                    <% }); %>
+                  </ul>
                 <% }); %>
-                </li>
-                <% } %>
-                <% }); %>
-              </ul>
-              <% }); %>
               <% }); %>
             </section>
           </div>
