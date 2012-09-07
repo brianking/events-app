@@ -1,5 +1,4 @@
 // module dependencies
-
 var express = require("express");
 var routes = require("./routes");
 var http = require("http");
@@ -9,11 +8,10 @@ var path = require("path");
 process.env.TZ = "Europe/Warsaw";
 
 // populate database
-
+// TODO: this should probably have some sort of timer attached, so it's run at a regular interval instead of just when the server starts
 require("./modules/database").update();
 
-// stock express stuff
-
+// stock express stuff (best not to modify unless you know what you're doing)
 var app = express();
 
 app.configure(function(){
@@ -33,12 +31,14 @@ app.configure("development", function(){
   app.use(express.errorHandler());
 });
 
+// this is where we tell express about the pages it should display to the user, taken from the views/index.ejs folder
 app.get("/", routes.index);
 app.get("/index.html", routes.index);
 app.get("/schedule.html", routes.schedule);
 app.get("/session.html", routes.session);
 app.get("/starred.html", routes.starred);
 
+// start the http server!
 http.createServer(app).listen(app.get("port"), function(){
   console.log("Express server listening on port " + app.get("port"));
 });
