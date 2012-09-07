@@ -4,11 +4,6 @@ var db = new(cradle.Connection)().database("mozcamp-app");
 
 // create design document for notifications
 db.save('_design/notifications', {
-  byId: {
-    map: function(doc) {
-      if (doc.type == 'notification') emit(doc.noticeId, doc);
-    }
-  },
   byResource: {
     map: function(doc) {
       if (doc.type == 'notification') emit(doc.resource, doc);
@@ -45,7 +40,7 @@ var notification = function(){
 	    };
 	  
 	  // add notification in database
-	  db.save(notice);
+	  db.save(noticeId, notice);
 	  
 	  // return id
 	  return notice.noticeId;
@@ -94,20 +89,27 @@ var notification = function(){
 	 * @param	array	details		optional, up-to two items, produces two lines, first line is bold
 	 * @param	boolean toAll   if true the notification is seen by everybody, otherwise only those who have subscribed to the resource will see it
 	 * @param	string	icon		option, name of an icon to show
-	 * @return	integer	notice id, can be used to remove/modify notice or debug (if new_id = old_id then the notification hasn't changed)
 	 */
-	this.modify = function(notice_id, _details, _toAll, _icon) {
-	  var id = notice_id;
+	this.modify = function(notice_id, _details, _toAll, _icon) {	  
+	  var notice = db.get(notice_id, function(err, doc) {
+	    if (err) {
+	      //TODO
+	    } else {
+	      return doc;
+	    }
+	  });
 	  
-	  while (queue[i].noticeId != notice_id && i != queue.length) i++;
-	  if (i != queue.length) {
-	    queue[i].details = _details;
-	    queue[i].toAll = _toAll;
-	    queue[i].icon = _icon;
-	    queue[i].seqN++;
-	    id = ++_ID;
-	  }
+	  if (typeof _details !== 'undefined' || _details !== null)
+	    nNotice.details = _details;
+	    
+	  if (typeof _toAll !== 'undefined' || _toAll !== null)
+	    notice.toAll = _toAll;
+	    
+	  if (typeof _icon !== 'undefined' || _icon !== null)
+	    notice.icon = _icon;
+	    
+	  notice.seqN++;
 	  
-	  return id;
+	  db.save(notice_id, notice, function(err, res) {/*TODO*/});
 	};
 };
