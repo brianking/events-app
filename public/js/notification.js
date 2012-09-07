@@ -1,8 +1,27 @@
+// setup database connection
+var cradle = require("cradle");
+var db = new(cradle.Connection)().database("mozcamp-app");
+
+// create design document for notifications
+db.save('_design/notifications', {
+  byId: {
+    map: function(doc) {
+      if (doc.type == 'notification') emit(doc.noticeId, doc);
+    }
+  },
+  byResource: {
+    map: function(doc) {
+      if (doc.type == 'notification') emit(doc.resource, doc);
+    }
+  }
+});
+
+// import Array.contains method
+require("./utils.js");
+
 var notification = function(){
-	var queue = [];
 	var _ID = 0;
-	//var mutex = false;
-	
+
 	/**
 	 * Add notification to queue
 	 * 
@@ -13,13 +32,10 @@ var notification = function(){
 	 * @return	integer	notice id, can be used to remove/modify notice
 	 */
 	this.add = function(_resource, _details, _toAll, _icon) {
-	  //while (mutex) {}
-	  
-	  //mutex = true;
-	  var length = queue.length;
-	  
-	  queue[length] = 
+	  // create notification object
+	  var notice = 
 	    {
+	      type : 'notification',
 	      resource : _resource,
 	      details : _details,
 	      toAll : _toAll,
@@ -27,9 +43,12 @@ var notification = function(){
 	      seqN : 0,
 	      noticeId : _ID++
 	    };
-	  //mutex = false;
 	  
-	  return queue[length].noticeId;
+	  // add notification in database
+	  db.save(notice);
+	  
+	  // return id
+	  return notice.noticeId;
 	};
 	
 	/**
@@ -39,7 +58,24 @@ var notification = function(){
 	 * @param array seen  all the notifications we've already seen
 	 * @return array notifications  notification objects with all the details
 	 */
-	this.get = function(resources, seen) {};
+	this.get = function(_resources, _seens) {
+	  var notices = [];
+	  var i = 0;
+	  
+	  // get notifications using byResource view
+	  for (var j = 0; j < _resources.length; j++) {
+	    db.view('notifications/byResource', {key = _resources[j]}, function(err, doc) {
+	      if (err) {
+	        //TODO
+	      } else if (!_seens.seen(doc)) {
+	          notices[i++] = doc;
+	      }
+	    });
+	  }
+	  
+	  // return new notices to display
+	  return notices;
+	};
 
 	/**
 	 * Remove notification from queue
@@ -48,15 +84,7 @@ var notification = function(){
 	 * @return	void
 	 */
 	this.remove = function(notice_id) {
-	  //while (mutex) {}
 	  
-	  //mutex = true;
-	  var i = 0;
-	  
-	  while (queue[i].noticeId != notice_id && i != queue.length) i++;
-	  queue[i] = queue[queue.length - 1];
-	  queue = queue.slice(0, i).concat(queue.slice(i, -1).sort(function(a,b) { return a-b; }));
-	  //mutex = false;
 	};
 	
 	/**
@@ -69,9 +97,6 @@ var notification = function(){
 	 * @return	integer	notice id, can be used to remove/modify notice or debug (if new_id = old_id then the notification hasn't changed)
 	 */
 	this.modify = function(notice_id, _details, _toAll, _icon) {
-	  //while (mutex) {}
-	  
-	  //mutex = true;
 	  var id = notice_id;
 	  
 	  while (queue[i].noticeId != notice_id && i != queue.length) i++;
@@ -82,7 +107,6 @@ var notification = function(){
 	    queue[i].seqN++;
 	    id = ++_ID;
 	  }
-	  //mutex = false;
 	  
 	  return id;
 	};
