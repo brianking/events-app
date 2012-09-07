@@ -79,7 +79,13 @@ var notification = function(){
 	 * @return	void
 	 */
 	this.remove = function(notice_id) {
-	  
+	  db.get(notice_id, function(err, doc) {
+	    if (err) {
+	      //TODO
+	    } else {
+	      db.remove(doc._id, doc._rev, function(e, res) {/*TODO*/});
+	    }
+	  });
 	};
 	
 	/**
