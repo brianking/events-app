@@ -28,12 +28,13 @@ require(['//www.mozilla.org/tabzilla/media/js/tabzilla.js']);
 require(['//www.mozilla.org/media/js/site-min.js']);
 require(['//www.mozilla.org/media/js/mozorg-resp-min.js']);
 
-
 // When you write javascript in separate files, list them as
 // dependencies along with jquery
 define("app", function(require) {
 
     var $ = require('jquery');
+    // include notification object;
+    require('js/notification.js');
 
     // If using Twitter Bootstrap, you need to require all the
     // components that you use, like so:
@@ -43,13 +44,13 @@ define("app", function(require) {
 
     // START HERE: Put your js code here
     // notify animation
-    $(function(){
-    	$('#notify').delay('4000').slideToggle('slow', function(){
-    		$(this).click(function(){
-    			$(this).slideToggle('slow');
-    		});
-    	});
-    });
+//    $(function(){
+//    	$('#notify').slideToggle('slow', function(){
+//    		$(this).click(function(){
+//    			$(this).slideToggle('slow');
+//    		});
+//    	});
+//    });
 
 	// starring session action (list)
 	$(function(){

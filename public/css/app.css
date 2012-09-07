@@ -17,7 +17,7 @@ html, body {
 	min-height: calc(100% - 2px);
 }
 
-#notify {
+#notice {
 	font-family: Open Sans;
 	font-size: smaller;
 	background: #fff;
@@ -26,20 +26,20 @@ html, body {
 	width: 100%;
 	display: none;
 }
-#notify article {
+#notice article {
 	padding: 10px;
 	height: 40px;
 }
-#notify h4 {
+#notice h4 {
 	font-weight: bold;
 	padding: 0;
 	margin: 0;
 }
-#notify p {
+#notice p {
 	padding: 0;
 	margin: 0;
 }
-#notify img {
+#notice img {
 	float: left;
 	padding: 0 10px 0 0;
 }

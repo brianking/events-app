@@ -1,40 +1,74 @@
-var notification = function(){
-	var queue = [];
+var notification = (function($){
+	// notices to display
+	var queue = [],
+	// where are the notice icons
+	icons_dir = 'img/icons/notices/',
+	// notice types that have icons, general notice icon must be first
+	types = ['general'],
+	// indicates if there is an active notice
+	active_notice = false,
+	// shows a notice
+	show_notice = function() {
+		
+	};
 	
 	/**
 	 * Add notification to queue
-	 * 
-	 * @param	array	details		up-to two items, produces two lines, first line is bold
-	 * @param	integer	priority	optional, the priority level of notice
-	 * @param	string	icon		option, name of an icon to show
-	 * @return	integer	notice id, can be used to remove/modify notice
 	 */
-	this.add = function(details, priority, icon) {};
+	this.add = function(heading, details, type) {
+		queue.push({
+			'type': type,
+			'heading': heading,
+			'details': details
+		});
+		
+		if(active_notice === false) {
+			active_notice = true;
+			$('#notice-icon').attr('src', icons_dir + type + '.png').attr('alt', type + ' notice');
+		}
+	};
 	
 	/**
-	 * Remove notification from queue
-	 * 
-	 * @param	integer	notice_id	the id of the notice to remove
-	 * @return	void
-	 */
-	this.remove = function(notice_id) {};
-	
-	/**
-	 * Modify notification in queue
+	 * Display notice imediately
 	 *
-	 * @param	integer	notice_id	the id of the notice to modify
-	 * @param	array	details		optional, up-to two items, produces two lines, first line is bold
-	 * @param	integer	priority	optional, the priority level of notice
-	 * @param	string	icon		option, name of an icon to show
-	 * @return	integer	notice id, can be used to remove/modify notice
+	 * Displays the provided notice imediately regardless of what's 
+	 * in the queue. [Notice displays over active notice(s).]
 	 */
-	this.modify = function(notice_id, details, priority, icon) {};
+	this.priority = function(heading, details, type) {
+		
+	};
 	
 	/**
-	 * Checks if a notification is still queued
+	 * Initializes the notification system
 	 * 
-	 * @param	integer	notice_id	the id of the notice to check for
-	 * @return	boolean	TRUE if notice exists still
+	 * This function is called automatically on all pages
 	 */
-	this.exists = function(notice_id) {};
-};
+	 (function(){
+	 	// appends needed element to display notices in to body
+	 	$(body).append('<section id="notice">\
+	 		<article>\
+	 			<img src="img/icons/{notice type}.png" alt="{notice type icon}" id="notice-icon" />\
+	 			<h4 id="notice-header">{notice heading}</h4>\
+	 			<p id="notice-details">{notice details}</p>\
+	 		</article>\
+	 	</section>');
+	 })();
+})(jQuery);
+
+window.notification = new notification();
+
+console.log(window.notification);
+/*
+ ---
+ Notification HTML
+ ---
+ 
+ <section id="notice">
+ 	<article>
+ 		<img src="img/icons/{notice type}.png" alt="{notice type icon}" id="notice-icon" />
+ 		<h4 id="notice-header">{notice heading}</h4>
+ 		<p id="notice-details">{notice details}</p>
+ 	</article>
+ </section>
+ 
+*/
