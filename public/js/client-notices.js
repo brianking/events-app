@@ -1,4 +1,4 @@
-var notification = (function($){
+var notification = function(){
 	// notices to display
 	var queue = [],
 	// where are the notice icons
@@ -24,7 +24,18 @@ var notification = (function($){
 		
 		if(active_notice === false) {
 			active_notice = true;
+			if(typeof type === 'undefined') {
+				type = types[0];
+			}
 			$('#notice-icon').attr('src', icons_dir + type + '.png').attr('alt', type + ' notice');
+			
+			$('#notice-header').html(heading);
+			
+			if(typeof details !== 'undefined') {
+				$('#notice-details').show().html(details);
+			} else {
+				$('#notice-details').hide();
+			}
 		}
 	};
 	
@@ -43,21 +54,19 @@ var notification = (function($){
 	 * 
 	 * This function is called automatically on all pages
 	 */
-	 (function(){
+	 (function($){
 	 	// appends needed element to display notices in to body
-	 	$(body).append('<section id="notice">\
+	 	$(window.document.body).append('<section id="notice">\
 	 		<article>\
 	 			<img src="img/icons/{notice type}.png" alt="{notice type icon}" id="notice-icon" />\
 	 			<h4 id="notice-header">{notice heading}</h4>\
 	 			<p id="notice-details">{notice details}</p>\
 	 		</article>\
 	 	</section>');
-	 })();
-})(jQuery);
+	 })($);
+};
 
 window.notification = new notification();
-
-console.log(window.notification);
 /*
  ---
  Notification HTML

@@ -32,9 +32,9 @@ require(['//www.mozilla.org/media/js/mozorg-resp-min.js']);
 // dependencies along with jquery
 define("app", function(require) {
 
-    var $ = require('jquery');
-    // include notification object;
-    require('js/notification.js');
+    var $ = require(['jquery'], function($){
+    	require(['js/client-notices.js']);
+    });
 
     // If using Twitter Bootstrap, you need to require all the
     // components that you use, like so:
