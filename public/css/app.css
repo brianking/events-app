@@ -17,7 +17,7 @@ html, body {
 	min-height: calc(100% - 2px);
 }
 
-#notice {
+#notice, #p-notice {
 	font-family: Open Sans;
 	font-size: smaller;
 	background: #fff;
@@ -26,20 +26,24 @@ html, body {
 	width: 100%;
 	display: none;
 }
-#notice article {
+#p-notice {
+	z-index: 999999;
+	background-color: rgb(242, 149, 154);
+}
+#notice article, #p-notice article {
 	padding: 10px;
 	height: 40px;
 }
-#notice h4 {
+#notice h4, #p-notice h4 {
 	font-weight: bold;
 	padding: 0;
 	margin: 0;
 }
-#notice p {
+#notice p, #p-notice p {
 	padding: 0;
 	margin: 0;
 }
-#notice img {
+#notice img, #p-notice img {
 	float: left;
 	padding: 0 10px 0 0;
 }
